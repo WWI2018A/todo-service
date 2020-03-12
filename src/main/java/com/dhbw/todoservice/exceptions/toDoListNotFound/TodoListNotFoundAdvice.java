@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-public class ToDoListNotFoundAdvice {
+public class TodoListNotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(ToDoListNotFoundException.class)
+    @ExceptionHandler(TodoListNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String toDoListNotFoundHandler(ToDoListNotFoundException ex) {
+    String toDoListNotFoundHandler(TodoListNotFoundException ex) {
         return ex.getMessage();
     }
 }

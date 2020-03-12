@@ -1,9 +1,9 @@
 package com.dhbw.todoservice.repositories;
 
-import com.dhbw.todoservice.models.ToDo;
+import com.dhbw.todoservice.models.Todo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 
-public interface ToDoRepository extends MongoRepository<ToDo, String> {
+public interface TodoRepository extends MongoRepository<Todo, String> {
 
 }

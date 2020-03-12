@@ -1,6 +1,9 @@
 package com.dhbw.todoservice.models;
 
-public enum ToDoStatus {
+/**
+ * Represents a status of a to do.
+ */
+public enum TodoStatus {
     COMPLETED,
     UNCHECKED,
     NONE;
