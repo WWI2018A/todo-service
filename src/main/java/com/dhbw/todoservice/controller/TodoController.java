@@ -27,7 +27,7 @@ public class TodoController {
 
     /**
      * Get all to dos from the to do database
-     * @return
+     * @return list of all to dos.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<Todo> getTodos() {
