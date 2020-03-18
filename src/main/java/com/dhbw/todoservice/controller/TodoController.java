@@ -6,9 +6,11 @@ import com.dhbw.todoservice.models.Todo;
 import com.dhbw.todoservice.models.TodoList;
 import com.dhbw.todoservice.repositories.TodoListRepository;
 import com.dhbw.todoservice.repositories.TodoRepository;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TodoController {
@@ -27,15 +29,20 @@ public class TodoController {
 
     /**
      * Get all to dos from the to do database
+     *
      * @return list of all to dos.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<Todo> getTodos() {
+    public List<Todo> getTodos(@RequestParam(required = false) String listId) {
+        if (listId != null) {
+            return todoRepository.findByListId(listId);
+        }
         return todoRepository.findAll();
     }
 
     /**
      * Get the to do with the given id from the to do database. If no to do could be found, throw an Exception.
+     *
      * @param id
      * @return to do with the given id
      */
@@ -47,6 +54,7 @@ public class TodoController {
 
     /**
      * Create a new to do and save it to the to do database.
+     *
      * @param newTodo
      * @return new created to do
      */
@@ -57,6 +65,7 @@ public class TodoController {
 
     /**
      * Delete the to do with the given id from the to do database.
+     *
      * @param id
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -68,6 +77,7 @@ public class TodoController {
      * Get the to do with the given id from the to do database. Updated all fields (ids, createdDate, lastModifiedDate
      * etc. are excluded) and save it again in the to do database. If no to do exists with the given id, create a new
      * one and save it to the to do database.
+     *
      * @param id
      * @param updatedTodo
      * @return the updated to do with the given id (or the new to do)
@@ -87,6 +97,7 @@ public class TodoController {
 
     /**
      * Get list of al to do lists of the to do list database
+     *
      * @return list of all to do lists
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists")
@@ -97,7 +108,7 @@ public class TodoController {
     /**
      * @param id
      * @return to do list with the given id.
-     *
+     * <p>
      * If no to do list exists with the given id, throw an exception.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists/{id}")
@@ -108,6 +119,7 @@ public class TodoController {
 
     /**
      * Return a new to do list and save it to the to do list database.
+     *
      * @param newTodoList
      * @return new created to do list
      */
@@ -118,6 +130,7 @@ public class TodoController {
 
     /**
      * Delete the to do list with the given id from the to do list database.
+     *
      * @param id
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/todoLists/{id}")
@@ -127,7 +140,6 @@ public class TodoController {
     }
 
     /**
-     *
      * @param id
      * @param updatedTodoList
      * @return
