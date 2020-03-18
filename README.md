@@ -175,8 +175,8 @@ POST /todos
     
 
 PUT /todos/{id}
-     ----
-     Updates a todo with the given todo-id.
+   ----
+   Updates a todo with the given todo-id.
      
    * **URL:**
    
