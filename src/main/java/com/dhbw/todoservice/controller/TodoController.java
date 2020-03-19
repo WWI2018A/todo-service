@@ -6,11 +6,13 @@ import com.dhbw.todoservice.models.Todo;
 import com.dhbw.todoservice.models.TodoList;
 import com.dhbw.todoservice.repositories.TodoListRepository;
 import com.dhbw.todoservice.repositories.TodoRepository;
-import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class TodoController {
@@ -55,22 +57,27 @@ public class TodoController {
     /**
      * Create a new to do and save it to the to do database.
      *
-     * @param newTodo
+     * @param todo
      * @return new created to do
      */
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public Todo postTodo(@RequestBody Todo newTodo) {
-        return todoRepository.save(newTodo);
+    public ResponseEntity<Void> postTodo(@RequestBody Todo todo) throws URISyntaxException {
+
+        Todo newTodo = todoRepository.save(todo);
+        return ResponseEntity.created(new URI("/todos/" + newTodo.getId())).build();
     }
 
     /**
      * Delete the to do with the given id from the to do database.
      *
      * @param id
+     * @return
      */
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public void deleteTodoById(@PathVariable String id) {
+    public ResponseEntity<Void> deleteTodoById(@PathVariable String id) {
         todoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     /**
@@ -83,17 +90,28 @@ public class TodoController {
      * @return the updated to do with the given id (or the new to do)
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Todo putTodoById(@PathVariable String id, @RequestBody Todo updatedTodo) {
+    public ResponseEntity<Object> putTodoById(@PathVariable String id, @RequestBody Todo updatedTodo) throws URISyntaxException {
         return todoRepository.findById(id)
                 .map(todo -> {
                     todo.setListId(updatedTodo.getListId());
                     todo.setDueDate(updatedTodo.getDueDate());
                     todo.setStatus(updatedTodo.getStatus());
                     todo.setContent(updatedTodo.getContent());
-                    return todoRepository.save(todo);
+                    todoRepository.save(todo);
+                    return ResponseEntity.noContent().build();
                 })
-                .orElseGet(() -> todoRepository.save(updatedTodo));
+                .orElseGet(() -> {
+
+                    try {
+                        Todo newTodo = todoRepository.save(updatedTodo);
+                        return ResponseEntity.created(new URI("/todos/" + newTodo.getId())).build();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();
+                });
     }
+
 
     /**
      * Get list of al to do lists of the to do list database
