@@ -6,14 +6,14 @@ Description of the toDo-Service
 **Requests:**
 * [GET /todos](#get-todos)
 * [GET /todos/{id}](#get-todosid)
-* [GET /todoLists] (#get-todolists) 
-* [GET /todoLists/{id}] (#get-todolistsid)
-* [POST /](#post-todos)
-* [POST /todoLists] (#post-todolists)
-* [PUT /{id}](#put-todosid)
-* [PUT /todoLists/{id}] (#put-todolistsid)
-* [DELETE /{id}](#delete-todosid)
-* [DELETE /todoLists/{id}] (#delete-todolistsid) 
+* [GET /todos/todoLists] (#get-todostodoLists) 
+* [GET /todos/todoLists/{id}] (#get-todostodoListsid)
+* [POST /todos](#post-todos)
+* [POST /todos/todoLists] (#post-todotodoLists)
+* [PUT /todos/{id}](#put-todosid)
+* [PUT /todos/todoLists/{id}] (#put-todostodoListsid)
+* [DELETE /todos/{id}](#delete-todosid)
+* [DELETE /todos/todoLists/{id}] (#delete-todostodoListsid) 
 
 GET /todos
 ----
@@ -21,7 +21,7 @@ GET /todos
   
 * **URL:**
 
-  /
+  /todos
 
 * **Method:**
 
@@ -46,56 +46,58 @@ GET /todos
   * **Code:** 200 OK <br />
     **Content:** 
      ```json
-    {
-    "id": "5e6a72d68fadc7688e04e2bd",
-    "createdDate": "2020-03-12T17:35:18.764+0000",
-    "lastModifiedDate": "2020-03-12T17:35:18.764+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-    "dueDate": "1996-10-16T00:05:32.000+0000",
-    "status": "NONE",
-    "content": "Aufgabe XY machen"
-    },
-    {
-    "id": "5e6a731a833ae5306526eb35",
-    "createdDate": "2020-03-12T17:36:26.465+0000",
-    "lastModifiedDate": "2020-03-12T17:51:08.665+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-    "dueDate": "1996-10-16T00:05:32.000+0000",
-    "status": "COMPLETED",
-    "content": "Aufgabe XY machen"
-    },
-    {
-    "id": "5e6a75891d40026b13e5e43a",
-    "createdDate": "2020-03-12T17:46:49.573+0000",
-    "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-    "dueDate": "1996-10-16T00:05:32.000+0000",
-    "status": "NONE",
-    "content": "Aufgabe YZ machen"
-    },
-    {
-    "id": "5e7119ed46d2435c162f17ab",
-    "createdDate": "2020-03-17T18:41:49.452+0000",
-    "lastModifiedDate": "2020-03-17T18:41:49.452+0000",
-    "userId": null,
-    "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-    "dueDate": "1996-10-16T00:05:32.000+0000",
-    "status": "COMPLETED",
-    "content": "Aufgabe XY machen"
-    },
-    {
-    "id": "5e711a5446d2435c162f17ac",
-    "createdDate": "2020-03-17T18:43:32.127+0000",
-    "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-    "dueDate": "1996-10-16T00:05:32.000+0000",
-    "status": "COMPLETED",
-    "content": "Aufgabe AB machen"
-    }
+    [
+      {
+        "id": "5e6a72d68fadc7688e04e2bd",
+        "createdDate": "2020-03-12T17:35:18.764+0000",
+        "lastModifiedDate": "2020-03-12T17:35:18.764+0000",
+        "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+        "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+        "dueDate": "1996-10-16T00:05:32.000+0000",
+        "status": "NONE",
+        "content": "Aufgabe XY machen"
+      },
+      {
+        "id": "5e6a731a833ae5306526eb35",
+        "createdDate": "2020-03-12T17:36:26.465+0000",
+        "lastModifiedDate": "2020-03-12T17:51:08.665+0000",
+        "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+        "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+        "dueDate": "1996-10-16T00:05:32.000+0000",
+        "status": "COMPLETED",
+        "content": "Aufgabe XY machen"
+      },
+      {
+        "id": "5e6a75891d40026b13e5e43a",
+        "createdDate": "2020-03-12T17:46:49.573+0000",
+        "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
+        "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+        "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+        "dueDate": "1996-10-16T00:05:32.000+0000",
+        "status": "NONE",
+        "content": "Aufgabe YZ machen"
+      },
+      {
+        "id": "5e7119ed46d2435c162f17ab",
+        "createdDate": "2020-03-17T18:41:49.452+0000",
+        "lastModifiedDate": "2020-03-17T18:41:49.452+0000",
+        "userId": null,
+        "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+        "dueDate": "1996-10-16T00:05:32.000+0000",
+        "status": "COMPLETED",
+        "content": "Aufgabe XY machen"
+      },
+      {
+        "id": "5e711a5446d2435c162f17ac",
+        "createdDate": "2020-03-17T18:43:32.127+0000",
+        "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
+        "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+        "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+        "dueDate": "1996-10-16T00:05:32.000+0000",
+        "status": "COMPLETED",
+        "content": "Aufgabe AB machen"
+      }
+    ]
     ```
 
  
@@ -141,7 +143,7 @@ GET /todos/{id}
   
 * **URL:**
 
-  /{id}
+  /todos/{id}
 
 * **Method:**
 
@@ -167,14 +169,14 @@ GET /todos/{id}
     **Content:** 
      ```json
      {
-     "id": "5e6a72d68fadc7688e04e2bd",
-     "createdDate": "2020-03-12T17:35:18.764+0000",
-     "lastModifiedDate": "2020-03-12T17:35:18.764+0000",
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-     "dueDate": "1996-10-16T00:05:32.000+0000",
-     "status": "NONE",
-     "content": "Aufgabe XY machen"
+       "id": "5e6a72d68fadc7688e04e2bd",
+       "createdDate": "2020-03-12T17:35:18.764+0000",
+       "lastModifiedDate": "2020-03-12T17:35:18.764+0000",
+       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+       "dueDate": "1996-10-16T00:05:32.000+0000",
+       "status": "NONE",
+       "content": "Aufgabe XY machen"
      }
     ```
 
@@ -217,13 +219,13 @@ GET /todos/{id}
 
 ***
 
-GET /todoLists
+GET /todos/todoLists
 ----
   Returns a list of all to do lists.
   
 * **URL:**
 
-  /todoLists
+  /todos/todoLists
 
 * **Method:**
 
@@ -248,20 +250,22 @@ GET /todoLists
   * **Code:** 200 OK <br />
     **Content:** 
      ```json
-     {
-    "id": "5e6a6d1ea6b054649bb3a3a2",
-    "createdDate": "2020-03-12T17:10:54.923+0000",
-    "lastModifiedDate": "2020-03-12T17:10:54.923+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "name": "Listennamen Test"
-    },
-    {
-    "id": "5e71185b46d2435c162f17aa",
-    "createdDate": "2020-03-17T18:35:07.829+0000",
-    "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "name": "Listenname 1"
-    }
+     [
+       {
+        "id": "5e6a6d1ea6b054649bb3a3a2",
+        "createdDate": "2020-03-12T17:10:54.923+0000",
+        "lastModifiedDate": "2020-03-12T17:10:54.923+0000",
+        "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+        "name": "Listennamen Test"
+      },
+      {
+        "id": "5e71185b46d2435c162f17aa",
+        "createdDate": "2020-03-17T18:35:07.829+0000",
+        "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
+        "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+        "name": "Listenname 1"
+      }
+     ]
     ```
 
  
@@ -303,13 +307,13 @@ GET /todoLists
 
 ***
 
-GET /todoLists/{id}
+GET /todos/todoLists/{id}
 ----
   Returns the todo list with the given todolist-id.
   
 * **URL:**
 
-  /todoLists/{id}
+  /todos/todoLists/{id}
 
 * **Method:**
 
@@ -335,11 +339,11 @@ GET /todoLists/{id}
     **Content:** 
      ```json
      {
-     "id": "5e6a6d1ea6b054649bb3a3a2",
-     "createdDate": "2020-03-12T17:10:54.923+0000",
-     "lastModifiedDate": "2020-03-12T17:10:54.923+0000",
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-     "name": "Listennamen Test"
+       "id": "5e6a6d1ea6b054649bb3a3a2",
+       "createdDate": "2020-03-12T17:10:54.923+0000",
+       "lastModifiedDate": "2020-03-12T17:10:54.923+0000",
+       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+       "name": "Listennamen Test"
      }
     ```
 
@@ -382,14 +386,14 @@ GET /todoLists/{id}
 
 ***
 
-POST /
+POST /todos
    ----
    
    Creates a new todo.
      
    * **URL:**
    
-     /
+     /todos
    
    * **Method:**
    
@@ -409,11 +413,11 @@ POST /
    
        ```json
        {
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-       "dueDate": "1996-10-16T00:05:32.000Z",
-       "status": "COMPLETED",
-       "content": "Aufgabe YZ machen"
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+         "dueDate": "1996-10-16T00:05:32.000Z",
+         "status": "COMPLETED",
+         "content": "Aufgabe YZ machen"
        }
        ```
    
@@ -423,14 +427,14 @@ POST /
        **Content:** 
         ```json
        {
-       "id": "5e6a75891d40026b13e5e43a",
-       "createdDate": "2020-03-12T17:46:49.573+0000",
-       "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-       "dueDate": "1996-10-16T00:05:32.000+0000",
-       "status": "NONE",
-       "content": "Aufgabe YZ machen"
+         "id": "5e6a75891d40026b13e5e43a",
+         "createdDate": "2020-03-12T17:46:49.573+0000",
+         "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+         "dueDate": "1996-10-16T00:05:32.000+0000",
+         "status": "NONE",
+         "content": "Aufgabe YZ machen"
        }
        ```
    
@@ -465,14 +469,14 @@ POST /
    
    ***
 
-POST /todoLists
+POST /todos/todoLists
    ----
    
    Creates a new todo list.
      
    * **URL:**
    
-     /todoLists
+     /todos/todoLists
    
    * **Method:**
    
@@ -492,8 +496,8 @@ POST /todoLists
    
        ```json
        {
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "name": "Listenname 1"
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "name": "Listenname 1"
        }
        ```
    
@@ -503,11 +507,11 @@ POST /todoLists
        **Content:** 
         ```json
        {
-       "id": "5e71185b46d2435c162f17aa",
-       "createdDate": "2020-03-17T18:35:07.829+0000",
-       "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "name": "Listenname 1"
+         "id": "5e71185b46d2435c162f17aa",
+         "createdDate": "2020-03-17T18:35:07.829+0000",
+         "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "name": "Listenname 1"
        }
        ```
    
@@ -544,13 +548,13 @@ POST /todoLists
    
     
 
-PUT /{id}
+PUT /todos/{id}
    ----
    Updates a todo with the given todo-id.
      
    * **URL:**
    
-     /{id}
+     /todos/{id}
    
    * **Method:**
    
@@ -570,11 +574,11 @@ PUT /{id}
    
        ```json
        {
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-       "dueDate": "1996-10-16T00:05:32.000+0000",
-       "status": "COMPLETED",
-       "content": "Aufgabe AB machen"
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+         "dueDate": "1996-10-16T00:05:32.000+0000",
+         "status": "COMPLETED",
+         "content": "Aufgabe AB machen"
        }
        ```
    
@@ -584,14 +588,14 @@ PUT /{id}
        **Content:** 
         ```json
        {
-       "id": "5e711a5446d2435c162f17ac",
-       "createdDate": "2020-03-17T18:43:32.127+0000",
-       "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-       "dueDate": "1996-10-16T00:05:32.000+0000",
-       "status": "COMPLETED",
-       "content": "Aufgabe AB machen"
+         "id": "5e711a5446d2435c162f17ac",
+         "createdDate": "2020-03-17T18:43:32.127+0000",
+         "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+         "dueDate": "1996-10-16T00:05:32.000+0000",
+         "status": "COMPLETED",
+         "content": "Aufgabe AB machen"
        }
        ```
        
@@ -600,14 +604,14 @@ PUT /{id}
          **Content:** 
           ```json
        {
-       "id": "5e711a5446d2435c162f17ac",
-       "createdDate": "2020-03-17T18:43:32.127+0000",
-       "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-       "dueDate": "1996-10-16T00:05:32.000+0000",
-       "status": "COMPLETED",
-       "content": "Aufgabe AB machen"
+         "id": "5e711a5446d2435c162f17ac",
+         "createdDate": "2020-03-17T18:43:32.127+0000",
+         "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
+         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+         "dueDate": "1996-10-16T00:05:32.000+0000",
+         "status": "COMPLETED",
+         "content": "Aufgabe AB machen"
        }
          ```
     
@@ -642,13 +646,13 @@ PUT /{id}
    ***
    
 
-PUT /todoLists/{id}
+PUT /todos/todoLists/{id}
   ----
   Updates a todo list with the given todo-id.
   
 * **URL:**
 
-  /todoLists/{id}
+  /todos/todoLists/{id}
 
 * **Method:**
 
@@ -678,11 +682,11 @@ PUT /todoLists/{id}
     **Content:** 
      ```json
     {
-    "id": "5e6a6d1ea6b054649bb3a3a2",
-    "createdDate": "2020-03-12T17:10:54.923+0000",
-    "lastModifiedDate": "2020-03-17T18:46:10.121+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "name": "Neuer Name"
+      "id": "5e6a6d1ea6b054649bb3a3a2",
+      "createdDate": "2020-03-12T17:10:54.923+0000",
+      "lastModifiedDate": "2020-03-17T18:46:10.121+0000",
+      "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+      "name": "Neuer Name"
     }
     ```
     
@@ -691,11 +695,11 @@ PUT /todoLists/{id}
       **Content:** 
        ```json
     {
-    "id": "5e6a6d1ea6b054649bb3a3a2",
-    "createdDate": "2020-03-12T17:10:54.923+0000",
-    "lastModifiedDate": "2020-03-17T18:46:10.121+0000",
-    "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-    "name": "Neuer Name"
+      "id": "5e6a6d1ea6b054649bb3a3a2",
+      "createdDate": "2020-03-12T17:10:54.923+0000",
+      "lastModifiedDate": "2020-03-17T18:46:10.121+0000",
+      "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+      "name": "Neuer Name"
     }
       ```
  
@@ -729,13 +733,13 @@ PUT /todoLists/{id}
 
 ***
 
-DELETE /{id}
+DELETE /todos/{id}
   ----
   Deletes a todo with the given todo-id.
   
 * **URL:**
 
-  /{id}
+  /todos/{id}
 
 * **Method:**
 
@@ -799,13 +803,13 @@ DELETE /{id}
 
 ***
 
-DELETE /todoLists/{id}
+DELETE /todos/todoLists/{id}
   ----
   Deletes a todo List with the given todolist-id.
   
 * **URL:**
 
-  /todoLists/{id}
+  /todos/todoLists/{id}
 
 * **Method:**
 
