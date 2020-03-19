@@ -4,8 +4,8 @@ ToDo-Service
 Description of the toDo-Service
 
 **Requests:**
-* [GET /](#get-todos)
-* [GET /{id}](#get-todosid)
+* [GET /todos](#get-todos)
+* [GET /todos/{id}](#get-todosid)
 * [GET /todoLists] (#get-todolists) 
 * [GET /todoLists/{id}] (#get-todolistsid)
 * [POST /](#post-todos)
@@ -15,7 +15,7 @@ Description of the toDo-Service
 * [DELETE /{id}](#delete-todosid)
 * [DELETE /todoLists/{id}] (#delete-todolistsid) 
 
-GET /
+GET /todos
 ----
   Returns a list of all to dos.
   
@@ -135,7 +135,7 @@ GET /
 
 ***
 
-GET /{id}
+GET /todos/{id}
 ----
   Returns the todo with the given todo-id.
   
