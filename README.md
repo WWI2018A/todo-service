@@ -6,7 +6,7 @@ Description of the toDo-Service
 **Requests:**
 * [GET /todos](#get-todos)
 * [GET /todos/{id}](#get-todosid)
-* [GET /todos/todoLists] (#get-todoLists) 
+* [GET /todos/todoLists] (#get-todostodoLists)
 * [GET /todos/todoLists/{id}] (#get-todostodoListsid)
 * [POST /todos](#post-todos)
 * [POST /todos/todoLists] (#post-todotodoLists)
@@ -35,7 +35,7 @@ GET /todos
 
    **Optional:**
  
-   `none`
+   `listId=[string]`
 
 * **Data Params:**
 
