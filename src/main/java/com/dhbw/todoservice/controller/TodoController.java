@@ -156,6 +156,8 @@ public class TodoController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/todoLists/{id}")
     public ResponseEntity<Void> deleteTodoList(@PathVariable String id) {
         // TODO: Delete all to dos with the given to do list id
+        todoRepository.findByListId(id);
+        todoRepository.deleteById(id);
         todoListRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
