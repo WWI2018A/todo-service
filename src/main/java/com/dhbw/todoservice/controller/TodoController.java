@@ -6,6 +6,7 @@ import com.dhbw.todoservice.models.Todo;
 import com.dhbw.todoservice.models.TodoList;
 import com.dhbw.todoservice.repositories.TodoListRepository;
 import com.dhbw.todoservice.repositories.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class TodoController {
     // To do list database (database = repository)
     private final TodoListRepository todoListRepository;
 
-    TodoController(TodoRepository todoRepository, TodoListRepository todoListRepository) {
+    public TodoController(TodoRepository todoRepository, TodoListRepository todoListRepository) {
         this.todoRepository = todoRepository;
         this.todoListRepository = todoListRepository;
     }
@@ -36,7 +37,7 @@ public class TodoController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<Todo> getTodos(@RequestParam(required = false) String listId) {
-        if (listId != null) {
+        if (listId != null && !listId.isEmpty()) {
             return todoRepository.findByListId(listId);
         }
         return todoRepository.findAll();
