@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface TodoRepository extends MongoRepository<Todo, String> {
     public List<Todo> findByListId(String listId);
+    public void deleteByListId(String listId);
 }
