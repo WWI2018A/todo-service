@@ -139,23 +139,26 @@ public class TodoController {
     /**
      * Return a new to do list and save it to the to do list database.
      *
-     * @param newTodoList
+     * @param todoList
      * @return new created to do list
      */
     @RequestMapping(method = RequestMethod.POST, value = "/todoLists")
-    public TodoList postTodoList(@RequestBody TodoList newTodoList) {
-        return todoListRepository.save(newTodoList);
+    public ResponseEntity<Void> postTodoList(@RequestBody TodoList todoList) throws URISyntaxException {
+        TodoList newTodoList = todoListRepository.save(todoList);
+        return ResponseEntity.created(new URI("/todoLists/" + newTodoList.getId())).build();
     }
 
     /**
      * Delete the to do list with the given id from the to do list database.
      *
      * @param id
+     * @return
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/todoLists/{id}")
-    public void deleteTodoList(@PathVariable String id) {
+    public ResponseEntity<Void> deleteTodoList(@PathVariable String id) {
         // TODO: Delete all to dos with the given to do list id
         todoListRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     /**
@@ -164,13 +167,22 @@ public class TodoController {
      * @return
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/todoLists/{id}")
-    public TodoList putTodoList(@PathVariable String id, @RequestBody TodoList updatedTodoList) {
+    public ResponseEntity<Object> putTodoList(@PathVariable String id, @RequestBody TodoList updatedTodoList) {
         return todoListRepository.findById(id)
                 .map(todoList -> {
                     todoList.setName(updatedTodoList.getName());
-                    return todoListRepository.save(todoList);
+                    todoListRepository.save(todoList);
+                    return ResponseEntity.noContent().build();
                 })
-                .orElseGet(() -> todoListRepository.save(updatedTodoList));
+                .orElseGet(() -> {
+                    try {
+                        TodoList newTodoList = todoListRepository.save(updatedTodoList);
+                        return ResponseEntity.created(new URI("/todoLists/" + newTodoList.getId())).build();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();
+                });
     }
-
 }
+
