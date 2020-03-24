@@ -6,5 +6,4 @@ package com.dhbw.todoservice.models;
 public enum TodoStatus {
     COMPLETED,
     UNCHECKED,
-    NONE;
 }

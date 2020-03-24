@@ -24,7 +24,7 @@ public class Todo {
     private String userId;
     private String listId;
     private Date dueDate;
-    private TodoStatus status = TodoStatus.NONE;
+    private TodoStatus status = TodoStatus.UNCHECKED;
     private String content;
 
     public Todo(String userId, String listId, Date dueDate, String content) {
