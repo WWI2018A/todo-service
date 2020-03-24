@@ -6,14 +6,14 @@ Description of the toDo-Service
 **Requests:**
 * [GET /todos](#get-todos)
 * [GET /todos/{id}](#get-todosid)
-* [GET /todos/todoLists] (#get-todostodoLists)
-* [GET /todos/todoLists/{id}] (#get-todostodoListsid)
+* [GET /todos/todoLists](#get-todostodolists)
+* [GET /todos/todoLists/{id}](#get-todostodolistsid)
 * [POST /todos](#post-todos)
-* [POST /todos/todoLists] (#post-todotodoLists)
+* [POST /todos/todoLists](#post-todotodolists)
 * [PUT /todos/{id}](#put-todosid)
-* [PUT /todos/todoLists/{id}] (#put-todostodoListsid)
+* [PUT /todos/todoLists/{id}](#put-todostodolistsid)
 * [DELETE /todos/{id}](#delete-todosid)
-* [DELETE /todos/todoLists/{id}] (#delete-todostodoListsid) 
+* [DELETE /todos/todoLists/{id}](#delete-todostodolistsid) 
 
 GET /todos
 ----
