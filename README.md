@@ -584,7 +584,7 @@ PUT /todos/{id}
    
    * **Success Response:**
      
-     * **Code:** 200 OK <br />
+     * **Code:** 204 NO CONTENT <br />
        **Content:** 
         ```json
        {
@@ -599,21 +599,6 @@ PUT /todos/{id}
        }
        ```
        
-     OR:
-     * **Code:** 201 CREATED <br />
-         **Content:** 
-          ```json
-       {
-         "id": "5e711a5446d2435c162f17ac",
-         "createdDate": "2020-03-17T18:43:32.127+0000",
-         "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueDate": "1996-10-16T00:05:32.000+0000",
-         "status": "COMPLETED",
-         "content": "Aufgabe AB machen"
-       }
-         ```
     
    * **Error Response:**
    
@@ -678,7 +663,7 @@ PUT /todos/todoLists/{id}
 
 * **Success Response:**
   
-  * **Code:** 200 OK <br />
+  * **Code:** 204 NO CONTENT <br />
     **Content:** 
      ```json
     {
@@ -689,19 +674,6 @@ PUT /todos/todoLists/{id}
       "name": "Neuer Name"
     }
     ```
-    
-  OR:
-  * **Code:** 201 CREATED <br />
-      **Content:** 
-       ```json
-    {
-      "id": "5e6a6d1ea6b054649bb3a3a2",
-      "createdDate": "2020-03-12T17:10:54.923+0000",
-      "lastModifiedDate": "2020-03-17T18:46:10.121+0000",
-      "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-      "name": "Neuer Name"
-    }
-      ```
  
 * **Error Response:**
 
