@@ -6,7 +6,6 @@ import com.dhbw.todoservice.models.Todo;
 import com.dhbw.todoservice.models.TodoList;
 import com.dhbw.todoservice.repositories.TodoListRepository;
 import com.dhbw.todoservice.repositories.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
