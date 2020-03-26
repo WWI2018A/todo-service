@@ -11,15 +11,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -171,51 +168,58 @@ class TodoServiceApplicationTests {
 
     @Test
     public void postTodoListsTest() throws URISyntaxException {
-        final String baseUrl = "http://localhost:8080/todos/";
-        URI uri = new URI(baseUrl);
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TodoList todoList1 = new TodoList("user-2348du83rx", "Einkaufsliste 1");
-        todoList1.setId("list-2398rhz43x");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("X-COM-PERSIST", "true");
-        HttpEntity<TodoList> request = new HttpEntity<>(todoList1, headers);
+        when(todoListRepository.save(todoList1)).thenReturn(todoList1);
+        when(todoListRepository.findById(todoList1.getId())).thenReturn(Optional.of(todoList1));
 
-        ResponseEntity<Void> responseEntity = ResponseEntity.ok().build();
-
-        assertEquals(200, responseEntity.getStatusCodeValue());
+        ResponseEntity<Void> responseEntity = todoController.postTodoList(todoList1);
+        System.out.println(responseEntity.getStatusCode());
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
+        assertThat(todoRepository.findById(todoList1.getId()).get().getContent()).isEqualTo("Einkaufsliste 1");
     }
 
     @Test
     public void deleteTodoListsByIdTest() throws URISyntaxException {
-        final String baseUrl = "http://localhost:8080/todos/";
-        URI uri = new URI(baseUrl);
         TodoList todoList1 = new TodoList("user-2348du83rx", "Einkaufsliste 1");
         TodoList todoList2 = new TodoList("user-2348du83rx", "Einkaufsliste 2");
         TodoList todoList3 = new TodoList("user-2348du83rx", "Einkaufsliste 3");
-        todoList1.setId("list-2398rhz43x");
-        todoList2.setId("list-2398rhz43y");
-        todoList3.setId("list-2398rhz43z");
+        String todoList1Id = todoList1.getId();
+        String todoList2Id = todoList2.getId();
+        String todoList3Id = todoList3.getId();
 
-        //todoRepository.deleteById("list-2398rhz43x");
+        List<TodoList> todoLists = new ArrayList<>();
+        todoLists.add(todoList1);
+        todoLists.add(todoList2);
+        todoLists.add(todoList3);
 
-        ResponseEntity<Void> responseEntity = ResponseEntity.noContent().build();
-        //when(todoRepository.deleteByListId("list-2398rhz43x")).thenReturn(responseEntity);
-        //when(todoListRepository.deleteById("")).thenReturn(responseEntity);
+        when(todoListRepository.findAll()).thenReturn(todoLists);
+        doAnswer(invocation -> {
+            todoLists.remove(todoList1);
+            return null;
+        }).when(todoListRepository).deleteById(todoList1.getId());
+
+        ResponseEntity<Void> responseEntity = todoController.deleteTodoById(todoList1.getId());
 
         assertEquals(204, responseEntity.getStatusCodeValue());
+        assertEquals(todoListRepository.findAll().size(), 2);
     }
 
 
     @Test
     public void putTodoListsByIdTest() throws URISyntaxException {
-        TodoList todoList1 = new TodoList("user-2348du83rx", "Einkaufsliste 1");
-        todoList1.setId("list-2398rhz43x");
+        TodoList todoList1 = new TodoList("user-2348du83rx", "neue Einkaufsliste");
+        String todoList1Id = todoList1.getId();
 
-//        when(todoListRepository.save(todoList1)).thenReturn(todoList1); ---> Never used ---> Fehler
-        ResponseEntity<Void> responseEntity = ResponseEntity.noContent().build();
+        when(todoListRepository.findById(todoList1Id)).thenReturn(Optional.of(todoList1));
+        when(todoListRepository.save(todoList1)).thenReturn(todoList1);
 
-        assertEquals(204, responseEntity.getStatusCodeValue());
+        ResponseEntity<Object> responseEntity = todoController.putTodoList(todoList1Id,
+                new TodoList(todoList1.getUserId(), todoList1.getName()));
+
+        assertEquals(responseEntity.getStatusCodeValue(), 204);
+        assertEquals(todoListRepository.findById(todoList1Id).get().getName(), "neue Einkaufsliste");
     }
-
-
 }
