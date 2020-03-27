@@ -33,7 +33,7 @@ public class TodoController {
      *  // gets all to dos from current user
      * @param userId
      * @param listId
-     * @return all to dos from user
+     * @return list of all to dos from user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<Todo> getTodos(@RequestHeader("x-uid") String userId, @RequestParam(required = false) String listId) {
@@ -117,7 +117,7 @@ public class TodoController {
     /**
      * //gets all to do lists from current user
      * @param userId
-     * @return all to do lists from user
+     * @return list of all to do lists from user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists")
     public List<TodoList> getTodoLists(@RequestHeader("x-uid") String userId) {
