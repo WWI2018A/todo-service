@@ -30,9 +30,10 @@ public class TodoController {
 
 
     /**
-     * Get all to dos from the to do database
-     *
-     * @return list of all to dos.
+     *  // gets all to dos from current user
+     * @param userId
+     * @param listId
+     * @return all to dos from user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<Todo> getTodos(@RequestHeader("x-uid") String userId, @RequestParam(required = false) String listId) {
@@ -43,10 +44,10 @@ public class TodoController {
     }
 
     /**
-     * //TODO: Update comments --> describe what happens in this method
+     * //gets one to do by id from current user
      * @param userId
      * @param id
-     * @return
+     * @return to do from user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Todo getTodoById(@RequestHeader("x-uid") String userId, @PathVariable String id) {
@@ -114,9 +115,9 @@ public class TodoController {
 
 
     /**
-     * Get list of al to do lists of the to do list database
-     *
-     * @return list of all to do lists
+     * //gets all to do lists from current user
+     * @param userId
+     * @return all to do lists from user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists")
     public List<TodoList> getTodoLists(@RequestHeader("x-uid") String userId) {
@@ -124,8 +125,10 @@ public class TodoController {
     }
 
     /**
+     * // gets one to do list by id from current user
+     * @param userId
      * @param id
-     * @return to do list with the given id.
+     * @return to do list with the given id from user
      * <p>
      * If no to do list exists with the given id, throw an exception.
      */
