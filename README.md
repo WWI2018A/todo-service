@@ -37,6 +37,16 @@ GET /todos
  
    `listId=[string]`
 
+* **Header Params**
+
+  **Required:**
+  
+  `x-uid:[string]`
+  
+  **Optional:**
+  
+  `none`
+
 * **Data Params:**
 
     `none`

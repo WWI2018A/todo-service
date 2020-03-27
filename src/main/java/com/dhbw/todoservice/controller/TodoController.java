@@ -35,22 +35,22 @@ public class TodoController {
      * @return list of all to dos.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<Todo> getTodos(@RequestParam(required = false) String listId) {
+    public List<Todo> getTodos(@RequestHeader("x-uid") String userId, @RequestParam(required = false) String listId) {
         if (listId != null && !listId.isEmpty()) {
-            return todoRepository.findByListId(listId);
+            return todoRepository.findByListIdAndUserId(listId, userId);
         }
-        return todoRepository.findAll();
+        return todoRepository.findAllByUserId(userId);
     }
 
     /**
-     * Get the to do with the given id from the to do database. If no to do could be found, throw an Exception.
-     *
+     * //TODO: Update comments --> describe what happens in this method
+     * @param userId
      * @param id
-     * @return to do with the given id
+     * @return
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Todo getTodoById(@PathVariable String id) {
-        return todoRepository.findById(id)
+    public Todo getTodoById(@RequestHeader("x-uid") String userId, @PathVariable String id) {
+        return todoRepository.findByIdAndUserId(userId, id)
                 .orElseThrow(() -> new TodoNotFoundException(id));
     }
 
@@ -119,8 +119,8 @@ public class TodoController {
      * @return list of all to do lists
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists")
-    public List<TodoList> getTodoLists() {
-        return todoListRepository.findAll();
+    public List<TodoList> getTodoLists(@RequestHeader("x-uid") String userId) {
+        return todoListRepository.findAllByUserId(userId);
     }
 
     /**
@@ -130,8 +130,8 @@ public class TodoController {
      * If no to do list exists with the given id, throw an exception.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists/{id}")
-    public TodoList getTodoListById(@PathVariable String id) {
-        return todoListRepository.findById(id)
+    public TodoList getTodoListById(@RequestHeader("x-uid") String userId, @PathVariable String id) {
+        return todoListRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new TodoListNotFoundException(id));
     }
 
