@@ -11,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -49,6 +51,20 @@ class TodoServiceApplicationTests {
     void contextLoads() {
     }
 
+    @SpringBootTest
+    public class SmokeTest {
+
+        @Autowired
+        private TodoController controller;
+
+        @Test
+        public void contextLoads() throws Exception {
+            assertThat(controller).isNotNull();
+        }
+        }
+
+
+
     @Test
     public void getTodosTest() {
         Todo todo1 = new Todo("user-2348du83ru", "list-2398rhz43", new Date(), "Aufgabe 1");
@@ -60,8 +76,8 @@ class TodoServiceApplicationTests {
         todos.add(todo2);
         todos.add(todo3);
 
-        when(todoRepository.findByListId("list-2398rhz43")).thenReturn(todos);
-        List<Todo> result = todoController.getTodos("list-2398rhz43");
+        when(todoRepository.findByListIdAndUserId("user-2348du83ru", "list-2398rhz43")).thenReturn(todos);
+        List<Todo> result = todoController.getTodos("user-2348du83ru", "list-2398rhz43");
         assertThat(result.size()).isEqualTo(3);
     }
 
@@ -71,9 +87,9 @@ class TodoServiceApplicationTests {
 
         String todoId = todo.getId();
 
-        when(todoRepository.findById(todoId)).thenReturn(Optional.of(todo));
+        when(todoRepository.findByIdAndUserId(todoId, todo.getUserId())).thenReturn(Optional.of(todo));
 
-        Todo todoResult = todoController.getTodoById(todoId);
+        Todo todoResult = todoController.getTodoById(todo.getUserId(), todoId);
         verify(todoRepository).findById(todoId);
 
         assertEquals(todoId, todoResult.getId());
@@ -148,9 +164,9 @@ class TodoServiceApplicationTests {
         todoLists.add(todoList2);
         todoLists.add(todoList3);
 
-        when(todoListRepository.findAll()).thenReturn(todoLists);
+        when(todoListRepository.findAllByUserId("user-2348du83rx")).thenReturn(todoLists);
 
-        List<TodoList> result = todoController.getTodoLists();
+        List<TodoList> result = todoController.getTodoLists("user-2348du83rx");
         assertThat(result.size()).isEqualTo(3);
     }
 
@@ -159,9 +175,9 @@ class TodoServiceApplicationTests {
         TodoList todoList3 = new TodoList("user-2348du83rx", "Einkaufsliste 3");
         String todoList3Id = todoList3.getId();
 
-        when(todoListRepository.findById(todoList3Id)).thenReturn(Optional.of(todoList3));
+        when(todoListRepository.findByIdAndUserId(todoList3Id, "user-2348du83rx")).thenReturn(Optional.of(todoList3));
 
-        TodoList todoLists = todoController.getTodoListById(todoList3Id);
+        TodoList todoLists = todoController.getTodoListById("user-2348du83rx", todoList3Id);
 //        verify(todoRepository, times(1)).findById(todoList3Id);
         assertEquals(todoList3Id, todoLists.getId());
     }
