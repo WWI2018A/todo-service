@@ -27,7 +27,7 @@ GET /todos
 
   `GET`
   
-*  **URL Params:**
+* **URL Params:**
 
    **Required:**
  
@@ -49,7 +49,7 @@ GET /todos
 
 * **Data Params:**
 
-    `none`
+  `none`
 
 * **Success Response:**
   
@@ -109,7 +109,6 @@ GET /todos
       }
     ]
     ```
-
  
 * **Error Response:**
   
@@ -159,19 +158,29 @@ GET /todos/{id}
 
   `GET`
   
-*  **URL Params:**
+* **URL Params:**
 
-   **Required:**
+  **Required:**
  
-   `id=[string]`
+  `id=[string]`
 
-   **Optional:**
+  **Optional:**
  
-   `none`
+  `none`
+   
+* **Header Params**
+
+  **Required:**
+  
+  `x-uid:[string]`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
-    `none`
+  `none`
 
 * **Success Response:**
   
@@ -189,7 +198,6 @@ GET /todos/{id}
        "content": "Aufgabe XY machen"
      }
     ```
-
  
 * **Error Response:**
 
@@ -241,19 +249,29 @@ GET /todos/todoLists
 
   `GET`
   
-*  **URL Params:**
+* **URL Params:**
 
-   **Required:**
+  **Required:**
  
-   `none`
+  `none`
 
-   **Optional:**
+  **Optional:**
  
-   `none`
+  `none`
+   
+* **Header Params**
+
+  **Required:**
+  
+  `x-uid:[string]`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
-    `none`
+  `none`
 
 * **Success Response:**
   
@@ -277,7 +295,6 @@ GET /todos/todoLists
       }
      ]
     ```
-
  
 * **Error Response:**
 
@@ -329,19 +346,29 @@ GET /todos/todoLists/{id}
 
   `GET`
   
-*  **URL Params:**
+* **URL Params:**
 
-   **Required:**
+  **Required:**
  
-   `id=[string]`
+  `id=[string]`
 
-   **Optional:**
+  **Optional:**
  
-   `none`
+  `none`
+
+* **Header Params**
+
+  **Required:**
+  
+  `x-uid:[string]`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
-    `none`
+  `none`
 
 * **Success Response:**
   
@@ -401,244 +428,270 @@ POST /todos
    
    Creates a new todo.
      
-   * **URL:**
+* **URL:**
    
-     /todos
+   /todos
    
-   * **Method:**
+* **Method:**
    
-     `POST`
+   `POST`
      
-   *  **URL Params:**
+* **URL Params:**
    
-      **Required:**
+  **Required:**
     
-      `none`
+  `none`
    
-      **Optional:**
+  **Optional:**
     
-      `none`
+  `none`
+      
+* **Header Params**
+
+  **Required:**
+  
+  `none`
+  
+  **Optional:**
+  
+  `none`
    
-   * **Data Params:**
+* **Data Params:**
    
-       ```json
-       {
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueDate": "1996-10-16T00:05:32.000Z",
-         "status": "COMPLETED",
-         "content": "Aufgabe YZ machen"
-       }
-       ```
+   ```json
+   {
+     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+     "dueDate": "1996-10-16T00:05:32.000Z",
+     "status": "COMPLETED",
+     "content": "Aufgabe YZ machen"
+   }
+   ```
    
-   * **Success Response:**
-     
-     * **Code:** 201 CREATED <br />
-       **Content:** 
-        ```json
-       {
-         "id": "5e6a75891d40026b13e5e43a",
-         "createdDate": "2020-03-12T17:46:49.573+0000",
-         "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueDate": "1996-10-16T00:05:32.000+0000",
-         "status": "NONE",
-         "content": "Aufgabe YZ machen"
-       }
-       ```
+ * **Success Response:**
+
+   * **Code:** 201 CREATED <br />
+     **Content:** 
+      ```json
+     {
+       "id": "5e6a75891d40026b13e5e43a",
+       "createdDate": "2020-03-12T17:46:49.573+0000",
+       "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
+       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+       "dueDate": "1996-10-16T00:05:32.000+0000",
+       "status": "NONE",
+       "content": "Aufgabe YZ machen"
+     }
+     ```
    
     
-   * **Error Response:**
+ * **Error Response:**
+
+   * **Code:** 500 INTERNAL SERVER ERROR <br />
+     **Content:** 
+     ```json
+     {
+       "error" : "An error occurred." 
+     }
+     ```
+
+   OR
    
-     * **Code:** 500 INTERNAL SERVER ERROR <br />
-       **Content:** 
-       ```json
-       {
-         "error" : "An error occurred." 
-       }
-       ```
-   
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
-   
-   * **Sample JSON mock files:**
-   
-     `PostTodosRequest.json`<br>
-     `PostTodosResponse.json`
-   
-   * **Notes:**
-   
-   ***
+ * **Code:** 401 UNAUTHORIZED <br />
+   **Content:** ``
+   ```json
+   {
+     "error" : "Unauthorized."
+   }
+   ```
+
+* **Sample JSON mock files:**
+
+ `PostTodosRequest.json`<br>
+ `PostTodosResponse.json`
+
+* **Notes:**
+
+***
 
 POST /todos/todoLists
    ----
    
    Creates a new todo list.
      
-   * **URL:**
+* **URL:**
+
+ /todos/todoLists
+
+* **Method:**
+
+ `POST`
+
+*  **URL Params:**
+
+  **Required:**
+
+  `none`
+
+  **Optional:**
+
+  `none`
+      
+* **Header Params**
+
+ **Required:**
+
+ `none`
+
+ **Optional:**
+
+ `none`
+
+* **Data Params:**
+
+   ```json
+   {
+     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+     "name": "Listenname 1"
+   }
+   ```
    
-     /todos/todoLists
+* **Success Response:**
+
+ * **Code:** 201 CREATED <br />
+   **Content:** 
+    ```json
+   {
+     "id": "5e71185b46d2435c162f17aa",
+     "createdDate": "2020-03-17T18:35:07.829+0000",
+     "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
+     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+     "name": "Listenname 1"
+   }
+   ```
+
+* **Error Response:**
+
+ * **Code:** 500 INTERNAL SERVER ERROR <br />
+   **Content:** 
+   ```json
+   {
+     "error" : "An error occurred." 
+   }
+   ```
    
-   * **Method:**
-   
-     `POST`
-     
-   *  **URL Params:**
-   
-      **Required:**
-    
-      `none`
-   
-      **Optional:**
-    
-      `none`
-   
-   * **Data Params:**
-   
-       ```json
-       {
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "name": "Listenname 1"
-       }
-       ```
-   
-   * **Success Response:**
-     
-     * **Code:** 201 CREATED <br />
-       **Content:** 
-        ```json
-       {
-         "id": "5e71185b46d2435c162f17aa",
-         "createdDate": "2020-03-17T18:35:07.829+0000",
-         "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "name": "Listenname 1"
-       }
-       ```
-   
-    
-   * **Error Response:**
-   
-     * **Code:** 500 INTERNAL SERVER ERROR <br />
-       **Content:** 
-       ```json
-       {
-         "error" : "An error occurred." 
-       }
-       ```
-   
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
-   
-   * **Sample JSON mock files:**
-   
-     `PostTodoListsRequest.json`<br>
-     `PostTodoListsResponse.json`
-   
-   * **Notes:**
-   
-   ***
-   
+ OR
+
+ * **Code:** 401 UNAUTHORIZED <br />
+   **Content:** ``
+   ```json
+   {
+     "error" : "Unauthorized."
+   }
+   ```
+
+* **Sample JSON mock files:**
+
+ `PostTodoListsRequest.json`<br>
+ `PostTodoListsResponse.json`
+
+* **Notes:**
+
+***
     
 
 PUT /todos/{id}
    ----
    Updates a todo with the given todo-id.
      
-   * **URL:**
+* **URL:**
+
+ /todos/{id}
+
+* **Method:**
+
+ `PUT`
+
+*  **URL Params:**
+
+  **Required:**
+
+  `id=[string]`
+
+  **Optional:**
+
+  `none`
+
+* **Header Params**
+
+ **Required:**
+
+ `none`
+
+ **Optional:**
+
+ `none`
+
+* **Data Params:**
+
+   ```json
+   {
+     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+     "dueDate": "1996-10-16T00:05:32.000+0000",
+     "status": "COMPLETED",
+     "content": "Aufgabe AB machen"
+   }
+   ```
    
-     /todos/{id}
+* **Success Response:**
+
+ * **Code:** 204 NO CONTENT <br />
+   **Content:** 
+    ```json
+   {
+     "id": "5e711a5446d2435c162f17ac",
+     "createdDate": "2020-03-17T18:43:32.127+0000",
+     "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
+     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
+     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
+     "dueDate": "1996-10-16T00:05:32.000+0000",
+     "status": "COMPLETED",
+     "content": "Aufgabe AB machen"
+   }
+   ```
+
+
+* **Error Response:**
+
+ * **Code:** 500 INTERNAL SERVER ERROR <br />
+   **Content:** 
+   ```json
+   {
+     "error" : "An error occurred." 
+   }
+   ```
    
-   * **Method:**
-   
-     `PUT`
-     
-   *  **URL Params:**
-   
-      **Required:**
-    
-      `id=[string]`
-   
-      **Optional:**
-    
-      `none`
-   
-   * **Data Params:**
-   
-       ```json
-       {
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueDate": "1996-10-16T00:05:32.000+0000",
-         "status": "COMPLETED",
-         "content": "Aufgabe AB machen"
-       }
-       ```
-   
-   * **Success Response:**
-     
-     * **Code:** 204 NO CONTENT <br />
-       **Content:** 
-        ```json
-       {
-         "id": "5e711a5446d2435c162f17ac",
-         "createdDate": "2020-03-17T18:43:32.127+0000",
-         "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
-         "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueDate": "1996-10-16T00:05:32.000+0000",
-         "status": "COMPLETED",
-         "content": "Aufgabe AB machen"
-       }
-       ```
-       
-    
-   * **Error Response:**
-   
-     * **Code:** 500 INTERNAL SERVER ERROR <br />
-       **Content:** 
-       ```json
-       {
-         "error" : "An error occurred." 
-       }
-       ```
-   
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
-   
-   * **Sample JSON mock files:**
-   
-     `PutTodosIdRequest.json`<br>
-     `PutTodosIdResponse.json`
-   
-   * **Notes:**
-   
-   ***
+ OR
+
+ * **Code:** 401 UNAUTHORIZED <br />
+   **Content:** ``
+   ```json
+   {
+     "error" : "Unauthorized."
+   }
+   ```
+
+
+* **Sample JSON mock files:**
+
+ `PutTodosIdRequest.json`<br>
+ `PutTodosIdResponse.json`
+
+* **Notes:**
+
+***
    
 
 PUT /todos/todoLists/{id}
@@ -662,6 +715,16 @@ PUT /todos/todoLists/{id}
    **Optional:**
  
    `none`
+   
+* **Header Params**
+
+  **Required:**
+  
+  `none`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
@@ -704,7 +767,6 @@ PUT /todos/todoLists/{id}
       "error" : "Unauthorized."
     }
     ```
-    
 
 * **Sample JSON mock files:**
 
@@ -736,6 +798,16 @@ DELETE /todos/{id}
    **Optional:**
  
    `none`
+   
+* **Header Params**
+
+  **Required:**
+  
+  `none`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
@@ -806,6 +878,16 @@ DELETE /todos/todoLists/{id}
    **Optional:**
  
    `none`
+
+* **Header Params**
+
+  **Required:**
+  
+  `none`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
