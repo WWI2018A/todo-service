@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TodoListRepository extends MongoRepository<TodoList, String> {
-    public List<TodoList> findAllByUserId(String userId);
-    public Optional<TodoList> findByIdAndUserId(String id, String userId);
+    List<TodoList> findAllByUserId(String userId);
+    Optional<TodoList> findByIdAndUserId(String id, String userId);
 }
