@@ -27,7 +27,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew jibDockerBuild --image=$IMAGE_NAME
+      run: ./gradlew jibDockerBuild --image=johanneswiest/$IMAGE_NAME
     - name: Log into registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
     - name: Push image
@@ -49,5 +49,5 @@ jobs:
         echo IMAGE_ID=$IMAGE_ID
         echo VERSION=$VERSION
 
-        docker tag image $IMAGE_ID:$VERSION
+        # docker tag image $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
