@@ -27,7 +27,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew jibDockerBuild --image=$IMAGE_NAME:$(date +%s)
+      run: ./gradlew jibDockerBuild --image=$IMAGE_NAME
     - name: Push image
       run: |
         IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
