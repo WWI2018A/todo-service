@@ -35,7 +35,7 @@ public class TodoController {
      * @return list of all to dos.
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public List<Todo> getTodos(@RequestHeader("x-uid") String userId, @RequestParam(required = false) String listId) {
+    public List<Todo> getTodos(@RequestParam(required = false) String listId, @RequestHeader("x-uid") String userId) {
         if (listId != null && !listId.isEmpty()) {
             return todoRepository.findByListIdAndUserId(listId, userId);
         }
@@ -44,13 +44,14 @@ public class TodoController {
 
     /**
      * //TODO: Update comments --> describe what happens in this method
+     *
      * @param userId
      * @param id
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public Todo getTodoById(@RequestHeader("x-uid") String userId, @PathVariable String id) {
-        return todoRepository.findByIdAndUserId(userId, id)
+    public Todo getTodoById(@PathVariable String id, @RequestHeader("x-uid") String userId) {
+        return todoRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new TodoNotFoundException(id));
     }
 
@@ -154,7 +155,7 @@ public class TodoController {
      * @return
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/todoLists/{id}")
-    public ResponseEntity<Void> deleteTodoList(@PathVariable String id) {
+    public ResponseEntity<Void> deleteTodoListById(@PathVariable String id) {
         todoRepository.deleteByListId(id);
         todoListRepository.deleteById(id);
         return ResponseEntity.noContent().build();

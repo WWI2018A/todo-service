@@ -61,8 +61,7 @@ class TodoServiceApplicationTests {
         public void contextLoads() throws Exception {
             assertThat(controller).isNotNull();
         }
-        }
-
+    }
 
 
     @Test
@@ -76,8 +75,8 @@ class TodoServiceApplicationTests {
         todos.add(todo2);
         todos.add(todo3);
 
-        when(todoRepository.findByListIdAndUserId("user-2348du83ru", "list-2398rhz43")).thenReturn(todos);
-        List<Todo> result = todoController.getTodos("user-2348du83ru", "list-2398rhz43");
+        when(todoRepository.findByListIdAndUserId("list-2398rhz43", "user-2348du83ru")).thenReturn(todos);
+        List<Todo> result = todoController.getTodos("list-2398rhz43", "user-2348du83ru");
         assertThat(result.size()).isEqualTo(3);
     }
 
@@ -89,8 +88,8 @@ class TodoServiceApplicationTests {
 
         when(todoRepository.findByIdAndUserId(todoId, todo.getUserId())).thenReturn(Optional.of(todo));
 
-        Todo todoResult = todoController.getTodoById(todo.getUserId(), todoId);
-        verify(todoRepository).findById(todoId);
+        Todo todoResult = todoController.getTodoById(todoId, todo.getUserId());
+        verify(todoRepository).findByIdAndUserId(todoId, todo.getUserId());
 
         assertEquals(todoId, todoResult.getId());
         assertEquals("list-2398rhz43", todoResult.getListId());
@@ -178,7 +177,6 @@ class TodoServiceApplicationTests {
         when(todoListRepository.findByIdAndUserId(todoList3Id, "user-2348du83rx")).thenReturn(Optional.of(todoList3));
 
         TodoList todoLists = todoController.getTodoListById("user-2348du83rx", todoList3Id);
-//        verify(todoRepository, times(1)).findById(todoList3Id);
         assertEquals(todoList3Id, todoLists.getId());
     }
 
@@ -189,38 +187,36 @@ class TodoServiceApplicationTests {
         TodoList todoList1 = new TodoList("user-2348du83rx", "Einkaufsliste 1");
 
         when(todoListRepository.save(todoList1)).thenReturn(todoList1);
-        when(todoListRepository.findById(todoList1.getId())).thenReturn(Optional.of(todoList1));
+        when(todoListRepository.findByIdAndUserId(todoList1.getId(), todoList1.getUserId())).thenReturn(Optional.of(todoList1));
 
         ResponseEntity<Void> responseEntity = todoController.postTodoList(todoList1);
-        System.out.println(responseEntity.getStatusCode());
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
-        assertThat(todoRepository.findById(todoList1.getId()).get().getContent()).isEqualTo("Einkaufsliste 1");
+        assertEquals(201, responseEntity.getStatusCodeValue());
+        assertEquals("Einkaufsliste 1", todoListRepository.
+                findByIdAndUserId(todoList1.getId(), todoList1.getUserId()).get().getName());
     }
 
     @Test
-    public void deleteTodoListsByIdTest() throws URISyntaxException {
-        TodoList todoList1 = new TodoList("user-2348du83rx", "Einkaufsliste 1");
-        TodoList todoList2 = new TodoList("user-2348du83rx", "Einkaufsliste 2");
-        TodoList todoList3 = new TodoList("user-2348du83rx", "Einkaufsliste 3");
-        String todoList1Id = todoList1.getId();
-        String todoList2Id = todoList2.getId();
-        String todoList3Id = todoList3.getId();
+    public void deleteTodoListsByIdTest() {
+        String userId = "user-2348du83rx";
+        TodoList todoList1 = new TodoList(userId, "Einkaufsliste 1");
+        TodoList todoList2 = new TodoList(userId, "Einkaufsliste 2");
+        TodoList todoList3 = new TodoList(userId, "Einkaufsliste 3");
 
         List<TodoList> todoLists = new ArrayList<>();
         todoLists.add(todoList1);
         todoLists.add(todoList2);
         todoLists.add(todoList3);
 
-        when(todoListRepository.findAll()).thenReturn(todoLists);
+        when(todoListRepository.findAllByUserId(userId)).thenReturn(todoLists);
         doAnswer(invocation -> {
             todoLists.remove(todoList1);
             return null;
         }).when(todoListRepository).deleteById(todoList1.getId());
 
-        ResponseEntity<Void> responseEntity = todoController.deleteTodoById(todoList1.getId());
+        ResponseEntity<Void> responseEntity = todoController.deleteTodoListById(todoList1.getId());
 
         assertEquals(204, responseEntity.getStatusCodeValue());
-        assertEquals(todoListRepository.findAll().size(), 2);
+        assertEquals(2, todoListRepository.findAllByUserId(userId).size());
     }
 
 
@@ -235,7 +231,7 @@ class TodoServiceApplicationTests {
         ResponseEntity<Object> responseEntity = todoController.putTodoList(todoList1Id,
                 new TodoList(todoList1.getUserId(), todoList1.getName()));
 
-        assertEquals(responseEntity.getStatusCodeValue(), 204);
-        assertEquals(todoListRepository.findById(todoList1Id).get().getName(), "neue Einkaufsliste");
+        assertEquals(204, responseEntity.getStatusCodeValue());
+        assertEquals("neue Einkaufsliste", todoListRepository.findById(todoList1Id).get().getName());
     }
 }
