@@ -12,7 +12,7 @@ import java.util.Date;
  * Represents a to do in the database.
  */
 @Data
-@Document(collection = "todo-service-todos")
+@Document(collection = "todo_service_todos")
 public class Todo {
 
     @Id
