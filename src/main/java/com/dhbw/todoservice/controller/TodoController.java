@@ -74,7 +74,7 @@ public class TodoController {
      * Delete the to-do with the given id from the to-do database.
      *
      * @param id
-     * @return 404 (not found)
+     * @return 204 (no content)
      */
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -156,7 +156,7 @@ public class TodoController {
      * Delete the to-do-list with the given id from the to-do-list database.
      *
      * @param id
-     * @return 404 (not found)
+     * @return 204 (no content)
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/todoLists/{id}")
     public ResponseEntity<Void> deleteTodoListById(@PathVariable String id) {
