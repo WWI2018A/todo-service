@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 /**
- * Represents a to do in the database.
+ * Represents a to-do in the database.
  */
 @Data
 @Document(collection = "todo_service_todos")

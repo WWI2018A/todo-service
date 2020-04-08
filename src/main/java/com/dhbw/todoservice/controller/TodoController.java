@@ -30,9 +30,11 @@ public class TodoController {
 
 
     /**
-     * Get all to dos from the to do database
+     * Get all user to-dos from the to-do database
      *
-     * @return list of all to dos.
+     * @param listId
+     * @param userId
+     * @return all to-dos from user (200)
      */
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public List<Todo> getTodos(@RequestParam(required = false) String listId, @RequestHeader("x-uid") String userId) {
@@ -43,11 +45,11 @@ public class TodoController {
     }
 
     /**
-     * //TODO: Update comments --> describe what happens in this method
+     * Get the user to-do by its id, if the to-do with the given id doesn't exist, throw an exception.
      *
      * @param userId
      * @param id
-     * @return
+     * @return the to-do (200)
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Todo getTodoById(@PathVariable String id, @RequestHeader("x-uid") String userId) {
@@ -56,10 +58,10 @@ public class TodoController {
     }
 
     /**
-     * Create a new to do and save it to the to do database.
+     * Create a new to-do and save it in the to-do database.
      *
      * @param todo
-     * @return new created to do
+     * @return 204 (no content)
      */
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public ResponseEntity<Void> postTodo(@RequestBody Todo todo) throws URISyntaxException {
@@ -69,10 +71,10 @@ public class TodoController {
     }
 
     /**
-     * Delete the to do with the given id from the to do database.
+     * Delete the to-do with the given id from the to-do database.
      *
      * @param id
-     * @return
+     * @return 204 (no content)
      */
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -82,13 +84,13 @@ public class TodoController {
     }
 
     /**
-     * Get the to do with the given id from the to do database. Updated all fields (ids, createdDate, lastModifiedDate
-     * etc. are excluded) and save it again in the to do database. If no to do exists with the given id, create a new
-     * one and save it to the to do database.
+     * Get the to-do with the given id from the to-do database. Updated all fields (ids, createdDate, lastModifiedDate
+     * are excluded) and save it again in the to-do database. If the to-do with the given id doesn't exist, create a new
+     * one and save it in the to-do database.
      *
      * @param id
      * @param updatedTodo
-     * @return the updated to do with the given id (or the new to do)
+     * @return 204 (no content) or 201 (created) if a new to-do was created because it didn't exist.
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ResponseEntity<Object> putTodoById(@PathVariable String id, @RequestBody Todo updatedTodo) throws URISyntaxException {
@@ -115,9 +117,10 @@ public class TodoController {
 
 
     /**
-     * Get list of al to do lists of the to do list database
+     * Get all user to-do-lists from the to-do-list database.
      *
-     * @return list of all to do lists
+     * @param userId
+     * @return all to-do-lists from user (200)
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists")
     public List<TodoList> getTodoLists(@RequestHeader("x-uid") String userId) {
@@ -125,10 +128,11 @@ public class TodoController {
     }
 
     /**
+     * Get the user to-do-list by its id, if the to-do-list with the given id doesn't exist, throw an exception.
+     *
+     * @param userId
      * @param id
-     * @return to do list with the given id.
-     * <p>
-     * If no to do list exists with the given id, throw an exception.
+     * @return the to-do-list (200)
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists/{id}")
     public TodoList getTodoListById(@RequestHeader("x-uid") String userId, @PathVariable String id) {
@@ -137,10 +141,10 @@ public class TodoController {
     }
 
     /**
-     * Return a new to do list and save it to the to do list database.
+     * Create a new to-do-list and save it in the to-do-list database.
      *
      * @param todoList
-     * @return new created to do list
+     * @return 201 (created)
      */
     @RequestMapping(method = RequestMethod.POST, value = "/todoLists")
     public ResponseEntity<Void> postTodoList(@RequestBody TodoList todoList) throws URISyntaxException {
@@ -149,10 +153,10 @@ public class TodoController {
     }
 
     /**
-     * Delete the to do list with the given id from the to do list database.
+     * Delete the to-do-list with the given id from the to-do-list database.
      *
      * @param id
-     * @return
+     * @return 204 (no content)
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/todoLists/{id}")
     public ResponseEntity<Void> deleteTodoListById(@PathVariable String id) {
@@ -162,9 +166,13 @@ public class TodoController {
     }
 
     /**
+     * Get the to-do-list with the given id from the to-do-list database. Updated all fields (ids, createdDate, lastModifiedDate
+     * are excluded) and save it again in the to-do-list database. If the to-do-list with the given id doesn't exist, create a new
+     * one and save it in the to-do-list database.
+     *
      * @param id
      * @param updatedTodoList
-     * @return
+     * @return 204 (no content) or 201 (created) if a new to-do-list was created because it didn't exist.
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/todoLists/{id}")
     public ResponseEntity<Object> putTodoList(@PathVariable String id, @RequestBody TodoList updatedTodoList) {
