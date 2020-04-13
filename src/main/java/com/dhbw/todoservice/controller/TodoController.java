@@ -102,7 +102,6 @@ public class TodoController {
                     todo.setDueDate(updatedTodo.getDueDate());
                     todo.setStatus(updatedTodo.getStatus());
                     todo.setContent(updatedTodo.getContent());
-                    todo.setUserId(userId);
                     todoRepository.save(todo);
                     return ResponseEntity.noContent().build();
                 })
@@ -186,7 +185,6 @@ public class TodoController {
         return todoListRepository.findById(id)
                 .map(todoList -> {
                     todoList.setName(updatedTodoList.getName());
-                    todoList.setUserId(userId);
                     todoListRepository.save(todoList);
                     return ResponseEntity.noContent().build();
                 })
