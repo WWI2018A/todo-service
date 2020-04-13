@@ -64,8 +64,8 @@ public class TodoController {
      * @return 204 (no content)
      */
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public ResponseEntity<Void> postTodo(@RequestBody Todo todo) throws URISyntaxException {
-
+    public ResponseEntity<Void> postTodo(@RequestBody Todo todo, @RequestHeader("x-uid") String userId) throws URISyntaxException {
+        todo.setUserId(userId);
         Todo newTodo = todoRepository.save(todo);
         return ResponseEntity.created(new URI("/todos/" + newTodo.getId())).build();
     }
