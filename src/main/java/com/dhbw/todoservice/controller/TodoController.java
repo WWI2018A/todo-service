@@ -47,8 +47,8 @@ public class TodoController {
     /**
      * Get the user to-do by its id, if the to-do with the given id doesn't exist, throw an exception.
      *
-     * @param userId
      * @param id
+     * @param userId
      * @return the to-do (200)
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -61,6 +61,7 @@ public class TodoController {
      * Create a new to-do and save it in the to-do database.
      *
      * @param todo
+     * @param userId
      * @return 204 (no content)
      */
     @RequestMapping(method = RequestMethod.POST, value = "/")
@@ -90,10 +91,11 @@ public class TodoController {
      *
      * @param id
      * @param updatedTodo
+     * @param userId
      * @return 204 (no content) or 201 (created) if a new to-do was created because it didn't exist.
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Object> putTodoById(@PathVariable String id, @RequestBody Todo updatedTodo) throws URISyntaxException {
+    public ResponseEntity<Object> putTodoById(@PathVariable String id, @RequestBody Todo updatedTodo, @RequestHeader("x-uid") String userId) throws URISyntaxException {
         return todoRepository.findById(id)
                 .map(todo -> {
                     todo.setListId(updatedTodo.getListId());
@@ -106,6 +108,7 @@ public class TodoController {
                 .orElseGet(() -> {
 
                     try {
+                        updatedTodo.setUserId(userId);
                         Todo newTodo = todoRepository.save(updatedTodo);
                         return ResponseEntity.created(new URI("/todos/" + newTodo.getId())).build();
                     } catch (URISyntaxException e) {
@@ -130,8 +133,8 @@ public class TodoController {
     /**
      * Get the user to-do-list by its id, if the to-do-list with the given id doesn't exist, throw an exception.
      *
-     * @param userId
      * @param id
+     * @param userId
      * @return the to-do-list (200)
      */
     @RequestMapping(method = RequestMethod.GET, value = "/todoLists/{id}")
@@ -144,10 +147,12 @@ public class TodoController {
      * Create a new to-do-list and save it in the to-do-list database.
      *
      * @param todoList
+     * @param userId
      * @return 201 (created)
      */
     @RequestMapping(method = RequestMethod.POST, value = "/todoLists")
-    public ResponseEntity<Void> postTodoList(@RequestBody TodoList todoList) throws URISyntaxException {
+    public ResponseEntity<Void> postTodoList(@RequestBody TodoList todoList, @RequestHeader("x-uid") String userId) throws URISyntaxException {
+        todoList.setUserId(userId);
         TodoList newTodoList = todoListRepository.save(todoList);
         return ResponseEntity.created(new URI("/todoLists/" + newTodoList.getId())).build();
     }
@@ -172,10 +177,11 @@ public class TodoController {
      *
      * @param id
      * @param updatedTodoList
+     * @param userId
      * @return 204 (no content) or 201 (created) if a new to-do-list was created because it didn't exist.
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/todoLists/{id}")
-    public ResponseEntity<Object> putTodoList(@PathVariable String id, @RequestBody TodoList updatedTodoList) {
+    public ResponseEntity<Object> putTodoList(@PathVariable String id, @RequestBody TodoList updatedTodoList, @RequestHeader("x-uid") String userId) {
         return todoListRepository.findById(id)
                 .map(todoList -> {
                     todoList.setName(updatedTodoList.getName());
@@ -184,6 +190,7 @@ public class TodoController {
                 })
                 .orElseGet(() -> {
                     try {
+                        updatedTodoList.setUserId(userId);
                         TodoList newTodoList = todoListRepository.save(updatedTodoList);
                         return ResponseEntity.created(new URI("/todoLists/" + newTodoList.getId())).build();
                     } catch (URISyntaxException e) {
