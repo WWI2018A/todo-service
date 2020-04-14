@@ -105,7 +105,7 @@ class TodoServiceApplicationTests {
         when(todoRepository.save(todo)).thenReturn(todo);
         when(todoRepository.findById(todo.getId())).thenReturn(Optional.of(todo));
 
-        ResponseEntity<Void> responseEntity = todoController.postTodo(todo);
+        ResponseEntity<Void> responseEntity = todoController.postTodo(todo, todo.getUserId());
         System.out.println(responseEntity.getStatusCode());
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
         assertThat(todoRepository.findById(todo.getId()).get().getContent()).isEqualTo("Aufgabe 1");
@@ -143,7 +143,7 @@ class TodoServiceApplicationTests {
         when(todoRepository.save(todo1)).thenReturn(todo1);
 
         ResponseEntity<Object> responseEntity = todoController.putTodoById(todo1Id,
-                new Todo(todo1.getUserId(), todo1.getListId(), todo1.getDueDate(), "Neue Aufgabe"));
+                new Todo(todo1.getUserId(), todo1.getListId(), todo1.getDueDate(), "Neue Aufgabe"), todo1.getUserId());
 
         assertEquals(responseEntity.getStatusCodeValue(), 204);
         assertEquals(todoRepository.findById(todo1Id).get().getContent(), "Neue Aufgabe");
@@ -189,7 +189,7 @@ class TodoServiceApplicationTests {
         when(todoListRepository.save(todoList1)).thenReturn(todoList1);
         when(todoListRepository.findByIdAndUserId(todoList1.getId(), todoList1.getUserId())).thenReturn(Optional.of(todoList1));
 
-        ResponseEntity<Void> responseEntity = todoController.postTodoList(todoList1);
+        ResponseEntity<Void> responseEntity = todoController.postTodoList(todoList1, todoList1.getUserId());
         assertEquals(201, responseEntity.getStatusCodeValue());
         assertEquals("Einkaufsliste 1", todoListRepository.
                 findByIdAndUserId(todoList1.getId(), todoList1.getUserId()).get().getName());
@@ -229,7 +229,7 @@ class TodoServiceApplicationTests {
         when(todoListRepository.save(todoList1)).thenReturn(todoList1);
 
         ResponseEntity<Object> responseEntity = todoController.putTodoList(todoList1Id,
-                new TodoList(todoList1.getUserId(), todoList1.getName()));
+                new TodoList(todoList1.getUserId(), todoList1.getName()), todoList1.getUserId());
 
         assertEquals(204, responseEntity.getStatusCodeValue());
         assertEquals("neue Einkaufsliste", todoListRepository.findById(todoList1Id).get().getName());
