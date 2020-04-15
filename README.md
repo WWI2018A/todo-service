@@ -450,7 +450,7 @@ POST /todos
 
   **Required:**
   
-  `none`
+  `x-uid:[string]`
   
   **Optional:**
   
@@ -532,7 +532,7 @@ POST /todos/todoLists
 
   **Required:**
 
-  `none`
+  `x-uid:[string]`
 
   **Optional:**
 
@@ -627,7 +627,7 @@ PUT /todos/{id}
 
  **Required:**
 
- `none`
+ `x-uid:[string]`
 
  **Optional:**
 
@@ -720,7 +720,7 @@ PUT /todos/todoLists/{id}
 
   **Required:**
   
-  `none`
+  `x-uid:[string]`
   
   **Optional:**
   
@@ -803,7 +803,7 @@ DELETE /todos/{id}
 
   **Required:**
   
-  `none`
+  `x-uid:[string]`
   
   **Optional:**
   
@@ -883,7 +883,7 @@ DELETE /todos/todoLists/{id}
 
   **Required:**
   
-  `none`
+  `x-uid:[string]`
   
   **Optional:**
   
