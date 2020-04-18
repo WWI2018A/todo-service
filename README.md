@@ -512,25 +512,25 @@ POST /todos/todoLists
 
  `POST`
 
-*  **URL Params:**
-
+* **URL Params:**
+   
   **Required:**
-
-  `x-uid:[string]`
-
+    
+  `none`
+   
   **Optional:**
-
+    
   `none`
       
 * **Header Params**
 
- **Required:**
-
- `none`
-
- **Optional:**
-
- `none`
+  **Required:**
+  
+  `x-uid:[string]`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
