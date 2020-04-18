@@ -450,7 +450,7 @@ POST /todos
 
   **Required:**
   
-  `none`
+  `x-uid:[string]`
   
   **Optional:**
   
@@ -460,30 +460,14 @@ POST /todos
    
    ```json
    {
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-     "dueDate": "1996-10-16T00:05:32.000Z",
-     "status": "COMPLETED",
-     "content": "Aufgabe YZ machen"
+     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a"
    }
    ```
    
  * **Success Response:**
 
-   * **Code:** 201 CREATED <br />
-     **Content:** 
-      ```json
-     {
-       "id": "5e6a75891d40026b13e5e43a",
-       "createdDate": "2020-03-12T17:46:49.573+0000",
-       "lastModifiedDate": "2020-03-12T17:46:49.573+0000",
-       "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-       "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-       "dueDate": "1996-10-16T00:05:32.000+0000",
-       "status": "NONE",
-       "content": "Aufgabe YZ machen"
-     }
-     ```
+   * **Code:** 204 No content <br />
+     **Content:** no content
    
     
  * **Error Response:**
@@ -509,11 +493,11 @@ POST /todos
 * **Sample JSON mock files:**
 
  `PostTodosRequest.json`<br>
- `PostTodosResponse.json`
 
 * **Notes:**
 
 ***
+
 
 POST /todos/todoLists
    ----
@@ -528,48 +512,39 @@ POST /todos/todoLists
 
  `POST`
 
-*  **URL Params:**
-
+* **URL Params:**
+   
   **Required:**
-
+    
   `none`
-
+   
   **Optional:**
-
+    
   `none`
       
 * **Header Params**
 
- **Required:**
-
- `none`
-
- **Optional:**
-
- `none`
+  **Required:**
+  
+  `x-uid:[string]`
+  
+  **Optional:**
+  
+  `none`
 
 * **Data Params:**
 
    ```json
    {
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
      "name": "Listenname 1"
    }
    ```
    
 * **Success Response:**
 
- * **Code:** 201 CREATED <br />
-   **Content:** 
-    ```json
-   {
-     "id": "5e71185b46d2435c162f17aa",
-     "createdDate": "2020-03-17T18:35:07.829+0000",
-     "lastModifiedDate": "2020-03-17T18:35:07.829+0000",
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-     "name": "Listenname 1"
-   }
-   ```
+ * **Code:** 204 No content <br />
+   **Content:** no content
+   
 
 * **Error Response:**
 
@@ -594,7 +569,6 @@ POST /todos/todoLists
 * **Sample JSON mock files:**
 
  `PostTodoListsRequest.json`<br>
- `PostTodoListsResponse.json`
 
 * **Notes:**
 
@@ -627,7 +601,7 @@ PUT /todos/{id}
 
  **Required:**
 
- `none`
+ `x-uid:[string]`
 
  **Optional:**
 
@@ -637,7 +611,6 @@ PUT /todos/{id}
 
    ```json
    {
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
      "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
      "dueDate": "1996-10-16T00:05:32.000+0000",
      "status": "COMPLETED",
@@ -648,19 +621,7 @@ PUT /todos/{id}
 * **Success Response:**
 
  * **Code:** 204 NO CONTENT <br />
-   **Content:** 
-    ```json
-   {
-     "id": "5e711a5446d2435c162f17ac",
-     "createdDate": "2020-03-17T18:43:32.127+0000",
-     "lastModifiedDate": "2020-03-17T18:43:32.127+0000",
-     "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-     "listId": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-     "dueDate": "1996-10-16T00:05:32.000+0000",
-     "status": "COMPLETED",
-     "content": "Aufgabe AB machen"
-   }
-   ```
+   **Content:** no content
 
 
 * **Error Response:**
@@ -687,7 +648,6 @@ PUT /todos/{id}
 * **Sample JSON mock files:**
 
  `PutTodosIdRequest.json`<br>
- `PutTodosIdResponse.json`
 
 * **Notes:**
 
@@ -720,7 +680,7 @@ PUT /todos/todoLists/{id}
 
   **Required:**
   
-  `none`
+  `x-uid:[string]`
   
   **Optional:**
   
@@ -737,16 +697,7 @@ PUT /todos/todoLists/{id}
 * **Success Response:**
   
   * **Code:** 204 NO CONTENT <br />
-    **Content:** 
-     ```json
-    {
-      "id": "5e6a6d1ea6b054649bb3a3a2",
-      "createdDate": "2020-03-12T17:10:54.923+0000",
-      "lastModifiedDate": "2020-03-17T18:46:10.121+0000",
-      "userId": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-      "name": "Neuer Name"
-    }
-    ```
+    **Content:** no content
  
 * **Error Response:**
 
@@ -771,7 +722,6 @@ PUT /todos/todoLists/{id}
 * **Sample JSON mock files:**
 
   `PutTodoListsIdRequest.json`<br>
-  `PutTodoListsIdResponse.json`
 
 * **Notes:**
 
@@ -811,7 +761,7 @@ DELETE /todos/{id}
 
 * **Data Params:**
 
-    `none`
+  `none`
 
 * **Success Response:**
   
@@ -849,9 +799,7 @@ DELETE /todos/{id}
     ``` 
 
 * **Sample JSON mock files:**
-
-  `PutTodosIdRequest.json`<br>
-  `PutTodosIdResponse.json`
+    `none`
 
 * **Notes:**
 
@@ -869,14 +817,14 @@ DELETE /todos/todoLists/{id}
 
   `DELETE`
   
-*  **URL Params:**
+* **URL Params:**
 
    **Required:**
- 
+
    `id=[string]`
 
    **Optional:**
- 
+
    `none`
 
 * **Header Params**
@@ -929,9 +877,7 @@ DELETE /todos/todoLists/{id}
     ``` 
 
 * **Sample JSON mock files:**
-
-  `PutTodoListsIdRequest.json`<br>
-  `PutTodoListsIdResponse.json`
+    `none`
 
 * **Notes:**
 
