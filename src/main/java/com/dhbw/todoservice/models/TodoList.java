@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Represents a to-do-list in the database.
@@ -17,9 +17,9 @@ public class TodoList {
     @Id
     private String id;
     @CreatedDate
-    private Calendar createdDate;
+    private Date createdDate;
     @LastModifiedDate
-    private Calendar lastModifiedDate;
+    private Date lastModifiedDate;
     private String userId;
     private String name;
 
