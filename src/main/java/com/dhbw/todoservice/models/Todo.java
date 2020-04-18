@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -19,9 +20,9 @@ public class Todo {
     @Id
     private String id;
     @CreatedDate
-    private Date createdDate;
+    private LocalDate createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    private LocalDate lastModifiedDate;
     private String userId;
     private String listId;
     private ZonedDateTime dueDate;
