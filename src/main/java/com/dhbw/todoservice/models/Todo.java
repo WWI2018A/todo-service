@@ -25,11 +25,11 @@ public class Todo {
     private LocalDate lastModifiedDate;
     private String userId;
     private String listId;
-    private ZonedDateTime dueDate;
+    private LocalDate dueDate;
     private TodoStatus status = TodoStatus.UNCHECKED;
     private String content;
 
-    public Todo(String userId, String listId, ZonedDateTime dueDate, String content) {
+    public Todo(String userId, String listId, LocalDate dueDate, String content) {
         this.userId = userId;
         this.listId = listId;
         this.dueDate = dueDate;
