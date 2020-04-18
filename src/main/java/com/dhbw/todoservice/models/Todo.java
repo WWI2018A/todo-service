@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -18,16 +19,16 @@ public class Todo {
     @Id
     private String id;
     @CreatedDate
-    private Date createdDate;
+    private ZonedDateTime createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    private ZonedDateTime lastModifiedDate;
     private String userId;
     private String listId;
-    private Date dueDate;
+    private ZonedDateTime dueDate;
     private TodoStatus status = TodoStatus.UNCHECKED;
     private String content;
 
-    public Todo(String userId, String listId, Date dueDate, String content) {
+    public Todo(String userId, String listId, ZonedDateTime dueDate, String content) {
         this.userId = userId;
         this.listId = listId;
         this.dueDate = dueDate;

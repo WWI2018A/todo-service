@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -17,9 +18,9 @@ public class TodoList {
     @Id
     private String id;
     @CreatedDate
-    private Date createdDate;
+    private ZonedDateTime createdDate;
     @LastModifiedDate
-    private Date lastModifiedDate;
+    private ZonedDateTime lastModifiedDate;
     private String userId;
     private String name;
 
