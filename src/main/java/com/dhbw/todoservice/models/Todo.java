@@ -19,9 +19,9 @@ public class Todo {
     @Id
     private String id;
     @CreatedDate
-    private ZonedDateTime createdDate;
+    private Date createdDate;
     @LastModifiedDate
-    private ZonedDateTime lastModifiedDate;
+    private Date lastModifiedDate;
     private String userId;
     private String listId;
     private ZonedDateTime dueDate;

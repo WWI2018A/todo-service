@@ -18,9 +18,9 @@ public class TodoList {
     @Id
     private String id;
     @CreatedDate
-    private ZonedDateTime createdDate;
+    private Date createdDate;
     @LastModifiedDate
-    private ZonedDateTime lastModifiedDate;
+    private Date lastModifiedDate;
     private String userId;
     private String name;
 
