@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "location")
+@CrossOrigin(origins = "*", exposedHeaders = "location")
 public class TodoController {
 
     // To do database (database = repository)
