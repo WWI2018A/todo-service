@@ -1,7 +1,5 @@
 ToDo-Service
 ---
-**Description:**
-Description of the toDo-Service
 
 **Requests:**
 * [GET /todos](#get-todos)
