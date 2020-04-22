@@ -1,6 +1,9 @@
 ToDo-Service
 ---
 
+Description:
+The ToDo-Service is responsible to return, create, update and delete todos or todo-lists. 
+
 **Requests:**
 * [GET /todos](#get-todos)
 * [GET /todos/{id}](#get-todosid)
