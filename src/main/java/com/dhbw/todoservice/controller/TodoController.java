@@ -63,7 +63,7 @@ public class TodoController {
      *
      * @param todo
      * @param userId
-     * @return 204 (no content)
+     * @return 201 (created)
      */
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public ResponseEntity<Void> postTodo(@RequestBody Todo todo, @RequestHeader("x-uid") String userId) throws URISyntaxException {
