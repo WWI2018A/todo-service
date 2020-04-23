@@ -122,7 +122,7 @@ GET /todos
     ```
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -143,7 +143,6 @@ GET /todos
 
   `GetTodosResponse.json`
 
-* **Notes:**
 
 ***
 
@@ -213,7 +212,7 @@ GET /todos/{id}
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -234,7 +233,6 @@ GET /todos/{id}
 
   `GetTodosIdResponse.json`
 
-* **Notes:**
 
 ***
 
@@ -310,7 +308,7 @@ GET /todos/todoLists
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -331,7 +329,6 @@ GET /todos/todoLists
 
   `GetTodoListsIdResponse.json`
 
-* **Notes:**
 
 ***
 
@@ -399,7 +396,7 @@ GET /todos/todoLists/{id}
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -420,7 +417,6 @@ GET /todos/todoLists/{id}
 
   `GetTodoListsIdResponse.json`
 
-* **Notes:**
 
 ***
 
@@ -484,7 +480,7 @@ POST /todos
    OR
    
  * **Code:** 401 UNAUTHORIZED <br />
-   **Content:** ``
+   **Content:** 
    ```json
    {
      "error" : "Unauthorized."
@@ -495,7 +491,6 @@ POST /todos
 
  `PostTodosRequest.json`<br>
 
-* **Notes:**
 
 ***
 
@@ -560,7 +555,7 @@ POST /todos/todoLists
  OR
 
  * **Code:** 401 UNAUTHORIZED <br />
-   **Content:** ``
+   **Content:** 
    ```json
    {
      "error" : "Unauthorized."
@@ -571,7 +566,6 @@ POST /todos/todoLists
 
  `PostTodoListsRequest.json`<br>
 
-* **Notes:**
 
 ***
     
@@ -638,7 +632,7 @@ PUT /todos/{id}
  OR
 
  * **Code:** 401 UNAUTHORIZED <br />
-   **Content:** ``
+   **Content:** 
    ```json
    {
      "error" : "Unauthorized."
@@ -650,7 +644,6 @@ PUT /todos/{id}
 
  `PutTodosIdRequest.json`<br>
 
-* **Notes:**
 
 ***
    
@@ -713,7 +706,7 @@ PUT /todos/todoLists/{id}
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -724,7 +717,6 @@ PUT /todos/todoLists/{id}
 
   `PutTodoListsIdRequest.json`<br>
 
-* **Notes:**
 
 ***
 
@@ -782,7 +774,7 @@ DELETE /todos/{id}
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -792,7 +784,7 @@ DELETE /todos/{id}
   OR
    
   * **Code:** 404 NOT FOUND <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
      "error" : "Could not find todo with the id: [id]."
@@ -802,7 +794,6 @@ DELETE /todos/{id}
 * **Sample JSON mock files:**
     `none`
 
-* **Notes:**
 
 ***
 
@@ -860,7 +851,7 @@ DELETE /todos/todoLists/{id}
   OR
 
   * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
       "error" : "Unauthorized."
@@ -870,7 +861,7 @@ DELETE /todos/todoLists/{id}
   OR
    
   * **Code:** 404 NOT FOUND <br />
-    **Content:** ``
+    **Content:** 
     ```json
     {
      "error" : "Could not find todolist with the id: [id]."
@@ -880,6 +871,5 @@ DELETE /todos/todoLists/{id}
 * **Sample JSON mock files:**
     `none`
 
-* **Notes:**
 
 ***
