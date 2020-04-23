@@ -467,7 +467,7 @@ POST /todos
    
  * **Success Response:**
 
-   * **Code:** 201 Created <br />
+   * **Code:** 201 CREATED <br />
      **Content:** Created
    
     
@@ -543,7 +543,7 @@ POST /todos/todoLists
    
 * **Success Response:**
 
- * **Code:** 201 Created <br />
+ * **Code:** 201 CREATED <br />
    **Content:** created
    
 
