@@ -467,8 +467,8 @@ POST /todos
    
  * **Success Response:**
 
-   * **Code:** 204 No content <br />
-     **Content:** no content
+   * **Code:** 201 Created <br />
+     **Content:** Created
    
     
  * **Error Response:**
@@ -543,8 +543,8 @@ POST /todos/todoLists
    
 * **Success Response:**
 
- * **Code:** 204 No content <br />
-   **Content:** no content
+ * **Code:** 201 Created <br />
+   **Content:** created
    
 
 * **Error Response:**
@@ -657,7 +657,7 @@ PUT /todos/{id}
 
 PUT /todos/todoLists/{id}
   ----
-  Updates a todo list with the given todo-id.
+  Updates a todo list with the given todolist-id.
   
 * **URL:**
 
