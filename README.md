@@ -121,12 +121,10 @@ GET /todos
     }
     ```
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
     
   OR
@@ -211,12 +209,10 @@ GET /todos/{id}
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
     
   OR
@@ -307,12 +303,10 @@ GET /todos/todoLists
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
     
   OR
@@ -395,12 +389,10 @@ GET /todos/todoLists/{id}
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
     
   OR
@@ -479,13 +471,11 @@ POST /todos
 
    OR
    
- * **Code:** 401 UNAUTHORIZED <br />
-   **Content:** 
-   ```json
-   {
-     "error" : "Unauthorized."
-   }
-   ```
+  * **Code:** 403 ACCESS DENIED <br />
+    **Content:** 
+    ```json
+    Acess Denied
+    ```
 
 * **Sample JSON mock files:**
 
@@ -554,13 +544,11 @@ POST /todos/todoLists
    
  OR
 
- * **Code:** 401 UNAUTHORIZED <br />
-   **Content:** 
-   ```json
-   {
-     "error" : "Unauthorized."
-   }
-   ```
+  * **Code:** 403 ACCESS DENIED <br />
+    **Content:** 
+    ```json
+    Acess Denied
+    ```
 
 * **Sample JSON mock files:**
 
@@ -631,13 +619,11 @@ PUT /todos/{id}
    
  OR
 
- * **Code:** 401 UNAUTHORIZED <br />
-   **Content:** 
-   ```json
-   {
-     "error" : "Unauthorized."
-   }
-   ```
+  * **Code:** 403 ACCESS DENIED <br />
+    **Content:** 
+    ```json
+    Acess Denied
+    ```
 
 
 * **Sample JSON mock files:**
@@ -705,12 +691,10 @@ PUT /todos/todoLists/{id}
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
 
 * **Sample JSON mock files:**
@@ -773,12 +757,10 @@ DELETE /todos/{id}
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
    
   OR
@@ -850,12 +832,10 @@ DELETE /todos/todoLists/{id}
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
+  * **Code:** 403 ACCESS DENIED <br />
     **Content:** 
     ```json
-    {
-      "error" : "Unauthorized."
-    }
+    Acess Denied
     ```
    
   OR
